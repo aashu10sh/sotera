@@ -15,12 +15,8 @@ from src.core.models import Base
 # access to the values within the .ini file in use.
 config = context.config
 
-config.config_args.update({
-    "DATABASE_URL":DATABASE_URL
-})
-config.set_main_option(
-    "sqlalchemy.url", DATABASE_URL
-)
+config.config_args.update({"DATABASE_URL": DATABASE_URL})
+config.set_main_option("sqlalchemy.url", DATABASE_URL)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.

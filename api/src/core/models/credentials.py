@@ -16,4 +16,3 @@ class CredentialModel(Base):
     # relationship
 
     user: Mapped[UserModel] = relationship()
-

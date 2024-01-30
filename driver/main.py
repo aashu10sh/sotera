@@ -1,7 +1,8 @@
 import ada as sensor
 
-import time 
+import time
 import serial
+
 uart = serial.Serial("/dev/ttyACM0", baudrate=57600, timeout=1)
 
 finger = sensor.Adafruit_Fingerprint(uart)
@@ -71,7 +72,7 @@ def get_fingerprint_detail():
 
 
 # pylint: disable=too-many-statements
-def enroll_finger(location : int ):
+def enroll_finger(location: int):
     """Take a 2 finger images and template it, then store in 'location'"""
     for fingerimg in range(1, 3):
         if fingerimg == 1:
@@ -141,8 +142,6 @@ def enroll_finger(location : int ):
     return True
 
 
-
-
 def get_num():
     """Use input() to get a valid number from 1 to 127. Retry till success!"""
     i = 0
@@ -190,5 +189,4 @@ if __name__ == "__main__":
     # print(f_data)
     got = get_fingerprint()
     if got:
-            print("Detected #", finger.finger_id, "with confidence", finger.confidence)
-
+        print("Detected #", finger.finger_id, "with confidence", finger.confidence)
