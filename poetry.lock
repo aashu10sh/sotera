@@ -468,6 +468,17 @@ files = [
 ]
 
 [[package]]
+name = "snowflake-id"
+version = "0.0.5"
+description = "The Snowflake generator done right."
+optional = false
+python-versions = "*"
+files = [
+    {file = "snowflake-id-0.0.5.tar.gz", hash = "sha256:d47b170b7614096225522964baff7a28448fe852c4baf797139fdc12c00d694e"},
+    {file = "snowflake_id-0.0.5-py3-none-any.whl", hash = "sha256:aa5155bd3fb2d14505f0989a99711c706a749335d37cc0d2ee0a512d2bdae7a4"},
+]
+
+[[package]]
 name = "sqlalchemy"
 version = "2.0.25"
 description = "Database Abstraction Library"
@@ -603,4 +614,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "3113fff3b4cc3db33cfe69a4ef79d5f004f6bd8b443f50d0acdb0526b8190605"
+content-hash = "c15e6c1fb300667a9c924d83d1603d8e42528342a5ed7b1f1dc7228a5aaf097f"

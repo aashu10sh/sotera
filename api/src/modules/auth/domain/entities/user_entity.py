@@ -7,6 +7,6 @@ class UserEntity(BaseModel):
 
     id: Optional[int] = None
     nonce: Optional[str] = None
-    key_id : Optional[int] = None
+    key_id: Optional[int] = None
     key: Optional[str] = None
     username: Optional[str] = None
