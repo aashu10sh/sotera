@@ -11,7 +11,7 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logging.root.setLevel(logging.INFO)
 
 
-app = FastAPI(title="Only One Outlier API", version="0.0.1")
+app = FastAPI(title="Sotera API", version="0.0.1")
 
 origins = ["http://localhost:8000", "http://localhost:3000"]
 

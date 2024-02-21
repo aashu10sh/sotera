@@ -14,4 +14,4 @@ router.add_api_route(
     endpoint=handle_hello_world,
 )
 
-router.include_router(auth_router)
+router.include_router(auth_router, tags=["Auth"])

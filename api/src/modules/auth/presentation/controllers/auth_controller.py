@@ -5,7 +5,6 @@ from src.core.domain.repositories.user_repository_interface import (
 )
 from src.core.exc.error_codes import ErrorCode
 from src.core.exc.sotera_exception import SoteraException
-from src.core.infra.repositories.user_repository import UserRepository
 from src.modules.auth.dependencies import get_session_repository, get_user_repository
 from src.modules.auth.domain.entities.session_entity import SessionEntity
 from src.modules.auth.domain.entities.user_entity import UserEntity
@@ -17,6 +16,7 @@ from src.modules.auth.domain.usecases.create_user_use_case import CreateUserUseC
 from src.modules.auth.domain.usecases.generate_session_use_case import (
     GenerateSessionUseCase,
 )
+from src.modules.auth.domain.usecases.validate_credentials_use_case import ValidateCredentialsUseCase
 
 
 class AuthController:
@@ -61,9 +61,24 @@ class AuthController:
     @classmethod
     async def login(
         cls,
+        user_request: UserRequest,
         user_repository: UserRepositoryInterface = Depends(get_user_repository),
         session_repository: SessionRepositoryInterface = Depends(
             get_session_repository
         ),
     ) -> SessionEntity:
-        raise NotImplementedError
+        validate_credentials = ValidateCredentialsUseCase(
+            user_repository=user_repository
+        )
+        validated = await validate_credentials.execute(
+            key_id=user_request.key_id, nonce=user_request.nonce
+        )
+        if not validated:
+            raise SoteraException(
+                status_code=403,
+                code=ErrorCode.INVALID_FIELDS,
+                msg="Incorrect Credentials",
+            )
+        generate_session = GenerateSessionUseCase(session_repository=session_repository)
+        session = await generate_session.execute(validated.id)#type:ignore
+        return SessionEntity(key=session.key)
