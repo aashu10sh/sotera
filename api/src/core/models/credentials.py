@@ -10,8 +10,7 @@ class CredentialModel(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     website: Mapped[str] = mapped_column(nullable=True)
-    decryptor_key: Mapped[str] = mapped_column(nullable=False)
-    encrypted_key: Mapped[str] = mapped_column(nullable=False)
+    password: Mapped[str] = mapped_column(nullable=False)
 
     # relationship
 

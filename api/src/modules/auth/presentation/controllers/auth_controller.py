@@ -16,7 +16,9 @@ from src.modules.auth.domain.usecases.create_user_use_case import CreateUserUseC
 from src.modules.auth.domain.usecases.generate_session_use_case import (
     GenerateSessionUseCase,
 )
-from src.modules.auth.domain.usecases.validate_credentials_use_case import ValidateCredentialsUseCase
+from src.modules.auth.domain.usecases.validate_credentials_use_case import (
+    ValidateCredentialsUseCase,
+)
 
 
 class AuthController:
@@ -80,5 +82,5 @@ class AuthController:
                 msg="Incorrect Credentials",
             )
         generate_session = GenerateSessionUseCase(session_repository=session_repository)
-        session = await generate_session.execute(validated.id)#type:ignore
+        session = await generate_session.execute(validated.id)  # type:ignore
         return SessionEntity(key=session.key)
