@@ -7,7 +7,9 @@ from src.modules.credentials.domain.repositories.credential_repository_interface
 
 class CreateCredentialUsecase:
     def __init__(self, credential_repository: CredentialRepositoryInterface) -> None:
-        self.credential_repository: CredentialRepositoryInterface = credential_repository
+        self.credential_repository: CredentialRepositoryInterface = (
+            credential_repository
+        )
 
     async def execute(
         self, user_id: int, website: str, password: str
