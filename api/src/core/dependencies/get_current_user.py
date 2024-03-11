@@ -26,6 +26,8 @@ async def get_current_user(
             code=ErrorCode.INSUFFICIENT_PERMISSION,
             msg="No Token",
         )
+    print(access_token)
+    access_token = access_token.split(" ")[-1]
     session: SessionRequestEntity | None = await session_repository.find_one(
         obj=SessionRequestEntity(key=access_token)
     )
@@ -49,7 +51,5 @@ async def get_current_user(
         raise SoteraException(
             status_code=500, code=ErrorCode.UNKOWN_ERROR, msg="Something Went Wrong!"
         )
-
-    breakpoint()
 
     return user

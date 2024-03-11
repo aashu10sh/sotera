@@ -13,7 +13,7 @@ logging.root.setLevel(logging.INFO)
 
 app = FastAPI(title="Sotera API", version="0.0.1")
 
-origins = ["http://localhost:8000", "http://localhost:3000"]
+origins = ["http://localhost:8000", "http://localhost:3000", "http://localhost:5173"]
 
 app.add_middleware(
     middleware_class=CORSMiddleware,

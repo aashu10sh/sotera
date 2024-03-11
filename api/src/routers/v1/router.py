@@ -4,6 +4,7 @@ from src.modules.credentials.presentation.routers.v1.credential_router import (
     router as credential_router,
 )
 
+
 router = APIRouter(prefix="/api/v1")
 
 

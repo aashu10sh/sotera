@@ -82,10 +82,13 @@ class Repository[Model: Base, T: BaseModel](RepositoryInterface[T]):
                 desc(column=text(text=sort_by)) if descending else text(text=sort_by)
             )
         )
+        print(query)
 
         result: Result[Tuple[Model]] = await self.db.execute(statement=query)
         data: Sequence[Model] = result.scalars().unique().all()
 
+        print(data)
+        print(filter)
         return [self.entity.model_validate(obj=x) for x in data]
 
     async def update(self, conditions: BaseModel, obj: BaseModel) -> int:

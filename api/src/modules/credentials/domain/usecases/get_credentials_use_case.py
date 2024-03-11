@@ -14,6 +14,7 @@ class GetCredentialsUseCase:
     ) -> List[CredentialEntity]:
         offset = (page - 1) * limit
         descending: bool = order == "desc"
+        print(offset, limit, sort_by, descending, user_id)
         credentials = await self.credential_repository.find_many(
             limit=limit,
             offset=offset,
@@ -21,4 +22,5 @@ class GetCredentialsUseCase:
             descending=descending,
             filter=CredentialEntity(user_id=user_id),
         )
+        print("users credentials is ", credentials)
         return credentials

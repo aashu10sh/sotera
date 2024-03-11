@@ -18,7 +18,9 @@ from src.modules.credentials.domain.usecases.create_credential_use_case import (
 from src.modules.credentials.domain.usecases.delete_credential_use_case import (
     DeleteCredentialUseCase,
 )
-from src.modules.credentials.domain.usecases.get_credentials_use_case import GetCredentialsUseCase
+from src.modules.credentials.domain.usecases.get_credentials_use_case import (
+    GetCredentialsUseCase,
+)
 from src.modules.credentials.domain.usecases.validate_correct_user_use_case import (
     ValidateCorrectUserUseCase,
 )
@@ -75,7 +77,7 @@ class CredentialController:
     @classmethod
     async def get(
         cls,
-        page: int = 20,
+        page: int = 1,
         limit: int = 20,
         sort_by: str = "updated_at",
         order: str = "desc",
@@ -88,6 +90,10 @@ class CredentialController:
             credential_repository=credential_repository
         )
         credentials: List[CredentialEntity] = await get_credentials_use_case.execute(
-            page=page, limit=limit, sort_by=sort_by, order=order, user_id=user.id #type:ignore
+            page=page,
+            limit=limit,
+            sort_by=sort_by,
+            order=order,
+            user_id=user.id,  # type:ignore
         )
         return credentials
