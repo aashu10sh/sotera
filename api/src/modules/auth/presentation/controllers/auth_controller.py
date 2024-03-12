@@ -1,5 +1,6 @@
 import logging
 from fastapi import Depends
+from src.core.dependencies.get_current_user import get_current_user
 from src.core.domain.repositories.user_repository_interface import (
     UserRepositoryInterface,
 )
@@ -84,3 +85,9 @@ class AuthController:
         generate_session = GenerateSessionUseCase(session_repository=session_repository)
         session = await generate_session.execute(validated.id)  # type:ignore
         return SessionEntity(key=session.key)
+
+    @classmethod
+    async def verify(cls, user : UserEntity = Depends(get_current_user)) -> bool:
+        return True 
+    
+    

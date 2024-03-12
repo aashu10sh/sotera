@@ -2,6 +2,8 @@
 	import { type Token } from '$lib/types/token';
 	import { FRONTEND_URL } from '$lib/config';
 	import logo from '$lib/assets/sotera_logo.png';
+	import { session_store } from '$lib/session';
+	import { redirect } from '@sveltejs/kit';
 
 	let user_token: string = '';
 	let is_error: boolean = false;
@@ -17,7 +19,11 @@
 		});
 
 		console.log(response.status);
-		console.log(await response.json());
+		const tokens = await response.json();
+		const session = await session_store();
+		session?.set(tokens.key);
+
+		window.location = `/dashboard?session=${tokens.key}`;
 	}
 	async function extract_auth_tokens(): Promise<Token> {
 		const token = user_token;
@@ -60,7 +66,7 @@
 
 <section class="h-screen relative">
 	<div
-		class="parent border-2 rounded-xl border-slate-900 text-white flex flex-col justify-center items-center border-white  top-[50%] left-[50%] translate-y-[50%] w-[20%] translate-x-[200%]"
+		class="parent border-2 rounded-xl border-slate-900 text-white flex flex-col justify-center items-center border-white top-[50%] left-[50%] translate-y-[50%] w-[20%] translate-x-[200%]"
 	>
 		<h1 class="text-5xl mb-5">Sotera</h1>
 		<div class="child">
