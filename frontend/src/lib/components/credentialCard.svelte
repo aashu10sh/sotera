@@ -17,11 +17,20 @@
         }
         window.location.reload();
     }
+
+    async function copy_to_clipboard(){
+        // Get the text field// For mobile devices
+
+   // Copy the text inside the text field
+          navigator.clipboard.writeText(password);
+    }
 </script>
 
-<section class="mb-24">
-    <h2 class="text-white">{website}</h2>
-    <code class="text-white">{password}</code>
-    <button on:click={deleteCredential}>Delete Credential</button>
-
+<section class="w-[20rem] mb-10 ">
+    <div class="border-2 bg-[#7ee7c2] text-black rounded-xl flex flex-col justify-center items-center gap-2 p-2">
+        <h2 class="">{website}</h2>
+        <input value={password}  type="password"/>
+        <button on:click={deleteCredential}>Delete Credential</button>
+        <button on:click={copy_to_clipboard}>Copy</button>
+    </div>
 </section>

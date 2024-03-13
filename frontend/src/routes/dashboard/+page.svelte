@@ -40,23 +40,25 @@
             is_error = true;
             error = "Problem Boy!"
         }
+        window.location.reload()
     }
     
 </script>
 
-<section class="text-white bg-black">
-    <div>
-        {#each credentials as credential, i}
-            <CredentialCard website={credential.website} password={credential.password} card_id={credential.id} session={sessionToken}/>
-        {/each}
-    </div>
-    <div>
+<section class="text-white bg-black relative">
+    <h1 class="text-center mb-16 mt-10 text-lg">SOTERA</h1>
+    <div class="mb-16 flex flex-col justify-center items-center gap-2">
         <h4> Add a New Credential!</h4>
         <form on:submit={submitNewCredential}  method="POST" class="text-black">
             <input name="website" bind:value={website} placeholder="Website URL">
             <input name="password" bind:value={password} placeholder="Password" type="password" >
             <button type="submit" class="text-black bg-white">Add</button>
         </form>
+    </div>
+    <div class="flex gap-5 justify-center items-center w-[80%] mx-auto">
+        {#each credentials as credential, i}
+            <CredentialCard website={credential.website} password={credential.password} card_id={credential.id} session={sessionToken}/>
+        {/each}
     </div>
     <div>
         {#if is_error}
