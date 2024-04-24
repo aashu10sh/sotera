@@ -2,7 +2,7 @@ from src.modules.credentials.domain.entities.credential_entity import Credential
 from src.modules.credentials.domain.repositories.credential_repository_interface import (
     CredentialRepositoryInterface,
 )
-import random 
+import datetime
 
 
 class CreateCredentialUsecase:
@@ -18,7 +18,11 @@ class CreateCredentialUsecase:
             obj=CredentialEntity(website=website)
         )
         if already:
-            website = website + str(random.choice(list(range(0,10)))) # generate_random_key()
+            website = (
+                website
+                + " - "
+                + str(datetime.datetime.now().strftime("%d/%m/%Y, %H:%M:%S"))
+            )  # generate_random_key()
 
         created: CredentialEntity | None = await self.credential_repository.create(
             obj=CredentialEntity(user_id=user_id, website=website, password=password)

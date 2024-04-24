@@ -3,7 +3,6 @@
 	import { FRONTEND_URL } from '$lib/config';
 	import logo from '$lib/assets/sotera_logo.png';
 	import { session_store } from '$lib/session';
-	import { redirect } from '@sveltejs/kit';
 
 	let user_token: string = '';
 	let is_error: boolean = false;
@@ -64,39 +63,86 @@
 	}
 </script>
 
-<section class="h-screen relative">
+<svelte:head>
+	<title>Sotera Login</title>
+</svelte:head>
+
+<section class="main">
 	<div
-		class="parent border-2 rounded-xl border-slate-900 text-white flex flex-col justify-center items-center border-white top-[50%] left-[50%] translate-y-[50%] w-[20%] translate-x-[200%]"
+		class=""
 	>
-		<h1 class="text-5xl mb-5">Sotera</h1>
-		<div class="child">
-			<div class="sibling rounded-xl mb-1">
-				<img class="w-full" src={logo} alt="Sotera Logo" />
-			</div>
-			<div class="sibling text-center mb-4">
+		<h1 class="header">Sotera</h1>
+			<div class="child">
+
+				<img class="" src={logo} alt="Sotera Logo" />
 				<code class="">Authentication Simplified!</code>
 			</div>
-			<div class="pb-12">
+			<div class="form-container">
 				<form on:submit={main}>
-					<div class="">
+					<div class="text-input">
 						<input
 							bind:value={user_token}
 							type="text"
 							placeholder="Your One Time Auth Key!"
-							class="sibling border rounded-md focus:outline-none p-2 text-black"
+							class=""
 						/>
 					</div>
-					<button type="submit" class="bg-white mt-3 w-[100%] p-2 text-black rounded-md"
+					<button type="submit" class=""
 						>Submit</button
 					>
 				</form>
-			</div>
+			
 		</div>
 		{#if is_error}
-			<span class="text-red-600">{error}</span>
+			<span class="error">{error}</span>
 		{/if}
 	</div>
 </section>
 
 <style lang="postcss">
+	.main{
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		justify-content: center;
+	}
+	.header{
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		color: white;
+		text-align: center;
+		font-size: 50px;
+		padding: 10px;
+
+	}
+	.child{
+		color:white;
+		display:flex;
+		flex-direction: column;
+		gap:20px;
+		justify-content: center;
+		align-items: center;
+		font-size:18px;
+
+	}
+	.form-container{
+		margin-top:30px;
+		display:flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		
+	}
+	.form-container>form{
+		display:flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.text-input{
+		margin-bottom:10px;
+	}
+	
+	.error{
+		color:red;
+	}
 </style>

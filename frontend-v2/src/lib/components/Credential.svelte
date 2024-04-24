@@ -2,8 +2,7 @@
 	export let website: string;
 	export let id: string;
 	export let password: string;
-	export const prerender = false;
-	function deleteCredential(id: string, session: string) {
+	async function deleteCredential(id: string, session: string) {
 		console.log('Deleting ID : ', id);
 	}
 </script>
@@ -19,7 +18,7 @@
 		<button
 			class="delete-button"
 			on:click={async () => {
-				deleteCredential(id, 'asads');
+				await deleteCredential(id, 'asads');
 			}}
 		>
 			Delete

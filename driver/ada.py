@@ -24,6 +24,7 @@ Implementation Notes
 * Adafruit CircuitPython firmware (2.2.0+) for the ESP8622 and M0-based boards:
   https://github.com/adafruit/circuitpython/releases
 """
+
 try:
     from typing import Tuple, List, Union
 except ImportError:

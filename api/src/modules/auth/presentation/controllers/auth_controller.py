@@ -87,7 +87,5 @@ class AuthController:
         return SessionEntity(key=session.key)
 
     @classmethod
-    async def verify(cls, user : UserEntity = Depends(get_current_user)) -> bool:
-        return True 
-    
-    
+    async def verify(cls, user: UserEntity = Depends(get_current_user)) -> bool:
+        return True

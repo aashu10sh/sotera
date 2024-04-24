@@ -31,7 +31,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	}
 	const session = locals.session;
 	const credentials: Credential[] = await getCredentials(session);
-    console.log('credentials are : ')
+	console.log('credentials are : ');
 	console.log(credentials);
 	return {
 		credentials: credentials

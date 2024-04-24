@@ -24,6 +24,19 @@ def get_fingerprint():
     return True
 
 
+def get_fingerprint_2():
+    """Get a finger print image, template it, and see if it matches!"""
+    print("Waiting for image...")
+    while finger.get_image() != sensor.OK:
+        pass
+    print("Templating...")
+    if finger.image_2_tz(1) != sensor.OK:
+        return 0
+    print("Searching...")
+    i = finger.finger_fast_search()
+    return i
+
+
 # pylint: disable=too-many-branches
 def get_fingerprint_detail():
     """Get a finger print image, template it, and see if it matches!
@@ -39,7 +52,7 @@ def get_fingerprint_detail():
             print("Imaging error")
         else:
             print("Other error")
-        return False
+        return 0
 
     print("Templating...", end="")
     i = finger.image_2_tz(1)
@@ -54,7 +67,7 @@ def get_fingerprint_detail():
             print("Image invalid")
         else:
             print("Other error")
-        return False
+        return 0
 
     print("Searching...", end="")
     i = finger.finger_fast_search()
@@ -62,13 +75,25 @@ def get_fingerprint_detail():
     # This block needs to be refactored when it can be tested.
     if i == sensor.OK:
         print("Found fingerprint!")
-        return True
+        return i
     else:
         if i == sensor.NOTFOUND:
             print("No match found")
+            return 0
         else:
+            print(i)
             print("Other error")
-        return False
+        return 0
+
+
+def search_fingerprint() -> int | None:
+    # i = get_fingerprint_2()
+    # i = get_fingerprint_detail()
+    get_fingerprint()
+    return finger.finger_id
+    i = 1 
+    print("The I is ", i)
+    return i if i else None
 
 
 # pylint: disable=too-many-statements
@@ -180,6 +205,14 @@ def get_num():
 #             print("Failed to delete")
 
 if __name__ == "__main__":
+    print("Welcome to Sotera!")
+    # finger.soft_reset()
+    outp = finger.empty_library()
+    print(outp)
+    if outp != sensor.OK:
+        print("Failed to remove Library Stuff")
+    print("Soft Reset Done!")
+    # get_user_choice()
     # enroll_finger(1)
     # print(finger.read_sysparam())
     # print(finger.__dict__)
@@ -187,6 +220,6 @@ if __name__ == "__main__":
     # finger.read_templates()
     # f_data = finger.get_fpdata()
     # print(f_data)
-    got = get_fingerprint()
-    if got:
-        print("Detected #", finger.finger_id, "with confidence", finger.confidence)
+    # got = get_fingerprint()
+    # if got:
+    #     print("Detected #", finger.finger_id, "with confidence", finger.confidence)

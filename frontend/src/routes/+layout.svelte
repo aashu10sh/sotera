@@ -1,7 +1,7 @@
 <script>
-	import '../app.css';
+	// import '../app.css';
 </script>
 
-<div class="bg-black">
+<div class="">
 	<slot />
 </div>
