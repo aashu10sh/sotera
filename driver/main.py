@@ -91,7 +91,7 @@ def search_fingerprint() -> int | None:
     # i = get_fingerprint_detail()
     get_fingerprint()
     return finger.finger_id
-    i = 1 
+    i = 1
     print("The I is ", i)
     return i if i else None
 
